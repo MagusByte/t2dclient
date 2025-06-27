@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "target": "ESNext",
+    "outDir": "dist/module",
+    "module": "ESNext",
+    "moduleResolution": "node10"
+  },
+  "exclude": [
+    "node_modules/**",
+    "dist/**",
+    "**/*.test.ts",
+    "vitest.config.mjs"
+  ],
+}
