@@ -1,4 +1,4 @@
-import { IApiClient } from "../ApiClient";
+import { IApiClient } from "../IApiClient";
 import { LinkCreatePreviewRequest, LinkCreatePreviewResponse } from "./LinkCreatePreviewRequest";
 import { LinkCreateRequest, LinkCreateResponse } from "./LinkCreateRequest";
 import { LinkDeleteRequest, LinkDeleteResponse } from "./LinkDeleteRequest";

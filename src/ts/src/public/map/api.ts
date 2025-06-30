@@ -1,4 +1,4 @@
-import { IApiClient } from "../ApiClient";
+import { IApiClient } from "../IApiClient";
 import { MapCreateRequest, MapCreateResponse } from "./MapCreateRequest";
 import { MapDeleteRequest, MapDeleteResponse } from "./MapDeleteRequest";
 import { MapGetResponse } from "./MapGetRequest";

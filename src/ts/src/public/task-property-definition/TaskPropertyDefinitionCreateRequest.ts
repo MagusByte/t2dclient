@@ -1,6 +1,6 @@
 import { TaskPropertyDefinitionDto } from "./dto";
 
-export interface TaskPropertyDefinitionCreateRequest {
+export interface  TaskPropertyDefinitionCreateRequest {
   workspaceId: string;
   item: TaskPropertyDefinitionDto;
 }

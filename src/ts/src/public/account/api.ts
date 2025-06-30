@@ -1,4 +1,4 @@
-import { IApiClient } from "../ApiClient";
+import { IApiClient } from "../IApiClient";
 import { AccountApiGetResponse } from "./AccountApiGetRequest";
 import { AccountApiSetupRequest, AccountApiSetupResponse } from "./AccountApiSetupRequest";
 import { AccountIsOnboardResponse } from "./AccountIsOnboardRequest";

@@ -1,4 +1,4 @@
-import { WorkspaceTokenItemDto } from "./WorkspaceTokenItemDto";
+import { WorkspaceTokenItemDto } from "./dto";
 
 export interface WorkspaceTokenVerifyRequest {
   token: string;
