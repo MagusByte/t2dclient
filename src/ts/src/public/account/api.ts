@@ -7,8 +7,7 @@ export class AccountApi {
   constructor(private readonly http: IApiClient) { }
   readonly #prefix = '/api/v1/account';
 
-
-get() {
+  get() {
     return this.http.getJson<AccountApiGetResponse>(`${this.#prefix}`);
   }
 

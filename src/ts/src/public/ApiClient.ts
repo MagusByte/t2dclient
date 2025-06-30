@@ -38,7 +38,7 @@ export interface IApiClient {
   getJson<R>(url: string, config?: Partial<ApiGetConfig>): Promise<R>;
   postJson<R, T = object>(url: string, body: T, config?: Partial<ApiPostConfig>): Promise<R>;
   putJson<R, T = object>(url: string, body: T, config?: Partial<ApiPutConfig>): Promise<R>;
-  patchJson<R>(url: string, config?: Partial<ApiPatchConfig>): Promise<R>;
+  patchJson<R, T = object>(url: string, body: T, config?: Partial<ApiPatchConfig>): Promise<R>;
   deleteJson<R>(url: string, config?: Partial<ApiDeleteConfig>): Promise<R>;
 
   setAuthToken(token: string): void;
