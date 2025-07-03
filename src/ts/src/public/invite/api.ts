@@ -5,7 +5,7 @@ import { InviteListRequest, InviteListResponse } from "./InviteListRequest";
 import { InvitePreviewRequest, InvitePreviewResponse } from "./InvitePreviewRequest";
 import { InviteRevokeRequest, InviteRevokeResponse } from "./InviteRevokeRequest";
 
-export class InviteApiService {
+export class InviteApi {
   constructor(readonly http: IApiClient) { }
   readonly #prefix = '/api/v1/invite';
 
