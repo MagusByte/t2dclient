@@ -1,5 +1,5 @@
 export interface WorkspaceSubscriptionRequest {
-  id: string;
+  workspaceId: string;
 }
 
 export interface WorkspaceSubscriptionResponse {

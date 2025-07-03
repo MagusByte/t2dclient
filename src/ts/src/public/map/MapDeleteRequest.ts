@@ -1,5 +1,5 @@
 export interface MapDeleteRequest {
-  id: number;
+  id: string;
 }
 
 export interface MapDeleteResponse {
