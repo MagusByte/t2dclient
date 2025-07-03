@@ -33,7 +33,7 @@ export class WorkspaceApi {
     return this.http.deleteJson<WorkspaceDeleteResponse>(`${this.#prefix}/${request.id}`);
   }
   getSubscription(request: WorkspaceSubscriptionRequest) {
-    return this.http.getJson<WorkspaceSubscriptionResponse>(`${this.#prefix}/${request.id}/subscription`)
+    return this.http.getJson<WorkspaceSubscriptionResponse>(`${this.#prefix}/${request.workspaceId}/subscription`)
   }
 
   removeMember(request: WorkspaceRemoveMemberRequest) {
