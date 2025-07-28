@@ -1,6 +1,6 @@
 {
   "name": "@magusbyte/t2dclient",
-  "version": "1.0.0-rc1",
+  "version": "1.0.0-rc1.1",
   "repository": "https://github.com/MagusByte/t2dclient",
   "description": "The client for the todo2d.com platform, written in TypeScript.",
   "license": "ISC",
