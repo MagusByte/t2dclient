@@ -17,10 +17,7 @@ export interface TaskFormulaDefinitionDto {
 
 
 
-export interface WorkspaceFeaturesDto {
-  maximumAllowedMaps: number;
-  maximumAllowedMembers: number;
-}
+export type WorkspaceFeaturesDto = Record<string, any>;
 
 
 export interface WorkspaceItemDto {
