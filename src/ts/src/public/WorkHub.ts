@@ -62,10 +62,16 @@ export class WorkHub<HubClient extends IHubClient> implements IWorkHub {
     await this.hubClient.invoke('unsubscribeFromWorkspace', workspaceId);
   }
 
+  /**
+   * @deprecated No longer needed, you only need to subscribe to a workspace
+   */
   async subscribeToMap(workspaceId: string, mapId: string): Promise<SubscribeToMapResponse> {
     return await this.hubClient.invoke<SubscribeToMapResponse>('subscribeToMap', workspaceId, mapId);
   }
 
+  /**
+   * @deprecated No longer needed, you only need to subscribe to a workspace
+   */
   async unsubscribeFromMap(workspaceId: string, mapId: string): Promise<void> {
     await this.hubClient.invoke('unsubscribeFromMap', workspaceId, mapId);
   }

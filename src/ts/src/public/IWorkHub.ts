@@ -37,8 +37,15 @@ export interface IWorkHub {
   removeEventHandler<K extends WorkhubEventMethods>(event: K, listener: (event: WorkHubEventsMap[K]) => void): void;
 
   subscribeToWorkspace(workspaceId: string): Promise<SubscribeToWorkspaceResponse>;
-  subscribeToMap(workspaceId: string, mapId: string): Promise<SubscribeToMapResponse>;
   unsubscribeFromWorkspace(workspaceId: string): Promise<void>;
+  
+  /**
+   * @deprecated No longer needed, you only need to subscribe to a workspace
+   */
+  subscribeToMap(workspaceId: string, mapId: string): Promise<SubscribeToMapResponse>;
+  /**
+   * @deprecated No longer needed, you only need to subscribe to a workspace
+   */
   unsubscribeFromMap(workspaceId: string, mapId: string): Promise<void>;
 
   // Workspaces

@@ -10,6 +10,9 @@ export interface SubscribeToWorkspaceResponse {
   placementItems: PlacementSetEvent[];
 }
 
+/**
+ * @deprecated Will be removed in the near future
+ */
 export interface SubscribeToMapResponse {
   placementItems: PlacementSetEvent[];
 }
