@@ -7,8 +7,9 @@ export interface SubscribeToWorkspaceResponse {
   taskItems: TaskSetEvent[];
   linkItems: LinkSetEvent[];
   mapItems: MapSetEvent[];
-
+  placementItems: PlacementSetEvent[];
 }
+
 export interface SubscribeToMapResponse {
   placementItems: PlacementSetEvent[];
 }
