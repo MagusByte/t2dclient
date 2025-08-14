@@ -2,7 +2,7 @@
 
 1. **Update the version:**
 	- For a regular release, run `npm version <new-version>` (e.g., `npm version 1.2.3`).
-	- For a prerelease (e.g., `v1.0.0-rc1`, `v1.0.0-rc1.1`), run `npm version prerelease --preid=rc` or specify the full version: `npm version 1.0.0-rc1.2`.
+	- For a prerelease (e.g., `v1.0.0-rc1`, `v1.0.0-rc1.1`), specify the full version: `npm version 1.0.0-rc1.2`.
 	- This updates `package.json` and creates a git tag.
 
 2. **Publish to npm:**
@@ -17,5 +17,4 @@
 - Prerelease versions follow the format used in the changelog, e.g., `v1.0.0-rc1`, `v1.0.0-rc1.1`.
 - Use the `--tag next` flag when publishing prereleases to npm.
 
-That's it! Your new release is now published and tagged.
 
