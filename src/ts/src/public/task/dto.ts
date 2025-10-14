@@ -15,6 +15,7 @@ export interface TaskItemDto {
   workspaceId: string;
   version: number;
   name: string;
+  description: string;
   done: boolean;
   attributes?: TaskAttributeDto[];
   properties: TaskPropertyDto[];

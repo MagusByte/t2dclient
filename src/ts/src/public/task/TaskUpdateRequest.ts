@@ -40,6 +40,7 @@ export interface TaskPinChange {
 
 export interface TaskUpdatedValueDto {
   name?: string;
+  description?: string;
   done?: boolean;
   attributeChanges?: TaskAttributeChange[];
   propertyChanges?: TaskPropertyChange[];
