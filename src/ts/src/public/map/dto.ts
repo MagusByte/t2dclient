@@ -5,12 +5,26 @@ export interface MapItemDto {
   name: string;
   version: number;
   sortKey: string;
-  backgroundColor: string;
+  displaySettings: MapDisplaySettings;
 }
 
 
 export interface MapUpdatedValueDto {
   name?: string;
   sortKey?: string;
-  backgroundColor?: string;
+  displaySettings?: MapDisplaySettings;
+}
+
+export interface MapDisplaySettings {
+  backgroundColor: string;
+  displayGrids: DisplayGrid[];
+}
+
+export interface DisplayGrid {
+  originX: number;
+  originY: number;
+  spacingX: number;
+  spacingY: number;
+  color: string;
+  isVisible: boolean;
 }

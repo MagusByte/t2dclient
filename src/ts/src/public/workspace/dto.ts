@@ -1,5 +1,6 @@
 import { WorkspaceMemberRole, WorkspacePlan, WorkspaceType, WorkspaceStatus } from "./values";
 import { TaskPropertyDefinitionDto, ValueDisplayType } from "../task-property-definition";
+import { MapDisplaySettings } from "../map";
 
 
 export interface WorkspaceMemberItem {
@@ -31,7 +32,7 @@ export interface WorkspaceItemDto {
   status: WorkspaceStatus;
   primaryMapId: string;
   emojiIcon: string;
-  defaultMapBackgroundColor: string;
+  defaultMapDisplaySettings: MapDisplaySettings;
   /** Date-time string (UTC) */
   deleteAfter?: string;
   members: WorkspaceMemberItem[];
@@ -50,7 +51,7 @@ export interface WorkspaceUpdatedValuesDto {
   name?: string;
   primaryMapId?: string;
   emojiIcon?: string;
-  defaultMapBackgroundColor?: string;
+  defaultMapDisplaySettings?: MapDisplaySettings;
   topRailConfigs?: WorkspaceTaskCardLabelConfig[];
   bottomRailConfigs?: WorkspaceTaskCardLabelConfig[];
   taskFormulaDefinitions?: TaskFormulaDefinitionDto[];
