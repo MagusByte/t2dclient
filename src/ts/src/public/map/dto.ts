@@ -5,6 +5,7 @@ export interface MapItemDto {
   name: string;
   version: number;
   sortKey: string;
+  isArchived: boolean;
   displaySettings: MapDisplaySettings;
 }
 
@@ -12,6 +13,7 @@ export interface MapItemDto {
 export interface MapUpdatedValueDto {
   name?: string;
   sortKey?: string;
+  isArchived?: boolean;
   displaySettings?: MapDisplaySettings;
 }
 
