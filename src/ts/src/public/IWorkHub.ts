@@ -8,10 +8,10 @@ import { TaskPropertyDefinitionCreateRequest, TaskPropertyDefinitionCreateRespon
 import { VersionDto } from "./version";
 import { WorkspaceCreateRequest, WorkspaceCreateResponse, WorkspaceUpdateRequest, WorkspaceUpdateResponse, WorkspaceDeleteRequest, WorkspaceDeleteResponse, WorkspaceSubscriptionRequest, WorkspaceSubscriptionResponse, WorkspaceRemoveMemberRequest, WorkspaceRemoveMemberResponse, WorkspaceCreateTutorialRequest, WorkspaceCreateTutorialResponse, WorkspaceMarkAsTutorialTemplateRequest, WorkspaceMarkAsTutorialTemplateResponse, WorkspaceDeletedEvent, WorkspaceSetEvent } from "./workspace";
 import { WorkspaceTokenCreateRequest, WorkspaceTokenCreateResponse, WorkspaceTokenListRequest, WorkspaceTokenListResponse, WorkspaceTokenRevokeRequest, WorkspaceTokenRevokeResponse, WorkspaceTokenVerifyRequest, WorkspaceTokenVerifyResponse } from "./workspace-token";
+import { ChecklistDeletedEvent, ChecklistSetEvent, ChecklistAddItemRequest, ChecklistAddItemResponse, ChecklistChangeOrderRequest, ChecklistChangeOrderResponse, ChecklistCreateRequest, ChecklistCreateResponse, ChecklistDeleteRequest, ChecklistDeleteResponse, ChecklistRemoveItemRequest, ChecklistRemoveItemResponse} from "./checklist";
 
-
-/** 
- * All the events the client can receive. 
+/**
+ * All the events the client can receive.
  */
 export interface WorkHubEventsMap {
   "OnVersion": VersionDto;
@@ -25,6 +25,8 @@ export interface WorkHubEventsMap {
   "OnTaskSet": TaskSetEvent;
   "OnWorkspaceDeleted": WorkspaceDeletedEvent;
   "OnWorkspaceSet": WorkspaceSetEvent;
+  "OnChecklistSet": ChecklistSetEvent;
+  "OnChecklistDeleted": ChecklistDeletedEvent;
 }
 
 
@@ -38,7 +40,7 @@ export interface IWorkHub {
 
   subscribeToWorkspace(workspaceId: string): Promise<SubscribeToWorkspaceResponse>;
   unsubscribeFromWorkspace(workspaceId: string): Promise<void>;
-  
+
   /**
    * @deprecated No longer needed, you only need to subscribe to a workspace
    */
@@ -93,4 +95,11 @@ export interface IWorkHub {
   createLink(request: LinkCreateRequest): Promise<LinkCreateResponse>;
   previewLinkCreate(request: LinkCreatePreviewRequest): Promise<LinkCreatePreviewResponse>;
   deleteLink(request: LinkDeleteRequest): Promise<LinkDeleteResponse>;
+
+  // Checklist
+  checklistCreate(request: ChecklistCreateRequest): Promise<ChecklistCreateResponse>;
+  checklistDelete(request: ChecklistDeleteRequest): Promise<ChecklistDeleteResponse>;
+  checklistAddItem(request: ChecklistAddItemRequest): Promise<ChecklistAddItemResponse>;
+  checklistRemoveItem(request: ChecklistRemoveItemRequest): Promise<ChecklistRemoveItemResponse>;
+  checklistChangeOrder(request: ChecklistChangeOrderRequest): Promise<ChecklistChangeOrderResponse>;
 }

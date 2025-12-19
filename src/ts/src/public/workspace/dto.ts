@@ -1,7 +1,14 @@
-import { WorkspaceMemberRole, WorkspacePlan, WorkspaceType, WorkspaceStatus } from "./values";
-import { TaskPropertyDefinitionDto, ValueDisplayType } from "../task-property-definition";
+import {
+  WorkspaceMemberRole,
+  WorkspacePlan,
+  WorkspaceType,
+  WorkspaceStatus,
+} from "./values";
+import {
+  TaskPropertyDefinitionDto,
+  ValueDisplayType,
+} from "../task-property-definition";
 import { MapDisplaySettings } from "../map";
-
 
 export interface WorkspaceMemberItem {
   accountId: string;
@@ -16,10 +23,7 @@ export interface TaskFormulaDefinitionDto {
   valueDisplay: ValueDisplayType;
 }
 
-
-
 export type WorkspaceFeaturesDto = Record<string, any>;
-
 
 export interface WorkspaceItemDto {
   id: string;
