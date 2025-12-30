@@ -1,5 +1,5 @@
 import { UpdateRequest, UpdateResponse } from "../../internal";
-import { TaskItemDto } from "./dto";
+import { TaskComponent, TaskItemDto } from "./dto";
 import { PinType } from "./values";
 import { ValueDisplayType } from "../task-property-definition";
 
@@ -45,6 +45,7 @@ export interface TaskUpdatedValueDto {
   attributeChanges?: TaskAttributeChange[];
   propertyChanges?: TaskPropertyChange[];
   pinChanges?: TaskPinChange[];
+  components?: TaskComponent[];
 }
 
 

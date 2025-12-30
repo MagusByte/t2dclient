@@ -1,3 +1,4 @@
+import { ChecklistSetEvent } from "./checklist";
 import { LinkSetEvent } from "./link";
 import { MapSetEvent } from "./map";
 import { PlacementSetEvent } from "./placement";
@@ -8,6 +9,7 @@ export interface SubscribeToWorkspaceResponse {
   linkItems: LinkSetEvent[];
   mapItems: MapSetEvent[];
   placementItems: PlacementSetEvent[];
+  checklistItems: ChecklistSetEvent[];
 }
 
 /**

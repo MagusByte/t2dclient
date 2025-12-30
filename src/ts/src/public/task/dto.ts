@@ -19,6 +19,7 @@ export interface TaskItemDto {
   done: boolean;
   attributes?: TaskAttributeDto[];
   properties: TaskPropertyDto[];
+  components: TaskComponent[];
   pins: PinDto[];
 }
 
@@ -27,8 +28,6 @@ export interface PinDto {
   remoteId: string;
   displayName: string;
 }
-
-
 
 export interface TaskConnectionDto {
   workspaceId: string;
@@ -42,4 +41,10 @@ export interface TaskAttributeDto {
 }
 export interface TaskFilterDto {
   done?: boolean;
+}
+
+export type TaskComponentType = "checklist";
+export interface TaskComponent {
+  type: TaskComponentType;
+  id: string;
 }

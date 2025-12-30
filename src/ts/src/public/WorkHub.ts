@@ -9,6 +9,7 @@ import { TaskCreateRequest, TaskCreateResponse, TaskUpdateRequest, TaskUpdateRes
 import { TaskPropertyDefinitionCreateRequest, TaskPropertyDefinitionCreateResponse, TaskPropertyDefinitionDeleteRequest, TaskPropertyDefinitionDeleteResponse } from "./task-property-definition";
 import { WorkspaceCreateRequest, WorkspaceCreateResponse, WorkspaceUpdateRequest, WorkspaceUpdateResponse, WorkspaceDeleteRequest, WorkspaceDeleteResponse, WorkspaceSubscriptionRequest, WorkspaceSubscriptionResponse, WorkspaceRemoveMemberRequest, WorkspaceRemoveMemberResponse, WorkspaceCreateTutorialRequest, WorkspaceCreateTutorialResponse, WorkspaceMarkAsTutorialTemplateRequest, WorkspaceMarkAsTutorialTemplateResponse } from "./workspace";
 import { WorkspaceTokenCreateRequest, WorkspaceTokenCreateResponse, WorkspaceTokenListRequest, WorkspaceTokenListResponse, WorkspaceTokenRevokeRequest, WorkspaceTokenRevokeResponse, WorkspaceTokenVerifyRequest, WorkspaceTokenVerifyResponse } from "./workspace-token";
+import { ChecklistCreateRequest, ChecklistCreateResponse, ChecklistDeleteRequest, ChecklistDeleteResponse, ChecklistAddItemRequest, ChecklistAddItemResponse, ChecklistRemoveItemRequest, ChecklistRemoveItemResponse, ChecklistChangeOrderRequest, ChecklistChangeOrderResponse } from "./checklist";
 
 export class WorkHub<HubClient extends IHubClient> implements IWorkHub {
   #handlers: {
@@ -27,6 +28,8 @@ export class WorkHub<HubClient extends IHubClient> implements IWorkHub {
     this.hubClient.on('OnTaskSet', (item) => this.invokeHandler("OnTaskSet", item));
     this.hubClient.on('OnWorkspaceDeleted', (item) => this.invokeHandler("OnWorkspaceDeleted", item));
     this.hubClient.on('OnWorkspaceSet', (item) => this.invokeHandler("OnWorkspaceSet", item));
+    this.hubClient.on('OnChecklistSet', (item) => this.invokeHandler("OnChecklistSet", item));
+    this.hubClient.on('OnChecklistDeleted', (item) => this.invokeHandler("OnChecklistDeleted", item));
   }
 
   private invokeHandler<K extends WorkhubEventMethods>(event: K, ev: WorkHubEventsMap[K]) {
@@ -187,5 +190,20 @@ export class WorkHub<HubClient extends IHubClient> implements IWorkHub {
   }
   async verifyWorkspaceToken(request: WorkspaceTokenVerifyRequest): Promise<WorkspaceTokenVerifyResponse> {
     return await this.hubClient.invoke<WorkspaceTokenVerifyResponse>('verifyWorkspaceToken', request);
+  }
+  async checklistCreate(request: ChecklistCreateRequest): Promise<ChecklistCreateResponse> {
+    return await this.hubClient.invoke<ChecklistCreateResponse>("checklistCreate", request);
+  }
+  async checklistDelete(request: ChecklistDeleteRequest): Promise<ChecklistDeleteResponse> {
+    return await this.hubClient.invoke<ChecklistDeleteResponse>("checklistDelete", request);
+  }
+  async checklistAddItem(request: ChecklistAddItemRequest): Promise<ChecklistAddItemResponse> {
+    return await this.hubClient.invoke<ChecklistAddItemResponse>("checklistAddIte", request);
+  }
+  async checklistRemoveItem(request: ChecklistRemoveItemRequest): Promise<ChecklistRemoveItemResponse> {
+    return await this.hubClient.invoke<ChecklistRemoveItemResponse>("checklistRemove", request);
+  }
+  async checklistChangeOrder(request: ChecklistChangeOrderRequest): Promise<ChecklistChangeOrderResponse> {
+    return await this.hubClient.invoke<ChecklistChangeOrderResponse>("checklistChange", request);
   }
 }

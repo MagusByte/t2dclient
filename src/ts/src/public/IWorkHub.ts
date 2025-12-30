@@ -1,3 +1,4 @@
+import { ChecklistCreateRequest, ChecklistCreateResponse, ChecklistDeleteRequest, ChecklistDeleteResponse, ChecklistAddItemRequest, ChecklistAddItemResponse, ChecklistRemoveItemRequest, ChecklistRemoveItemResponse, ChecklistChangeOrderRequest, ChecklistChangeOrderResponse, ChecklistSetEvent, ChecklistDeletedEvent } from "./checklist";
 import { SubscribeToMapResponse, SubscribeToWorkspaceResponse } from "./hub-only-events";
 import { InviteCreateRequest, InviteCreateResponse, InviteListRequest, InviteListResponse, InviteRevokeRequest, InviteRevokeResponse, InvitePreviewRequest, InvitePreviewResponse, InviteAcceptRequest, InviteAcceptResponse } from "./invite";
 import { LinkCreateRequest, LinkCreateResponse, LinkCreatePreviewRequest, LinkCreatePreviewResponse, LinkDeleteRequest, LinkDeleteResponse, LinkDeletedEvent, LinkSetEvent } from "./link";
@@ -25,6 +26,8 @@ export interface WorkHubEventsMap {
   "OnTaskSet": TaskSetEvent;
   "OnWorkspaceDeleted": WorkspaceDeletedEvent;
   "OnWorkspaceSet": WorkspaceSetEvent;
+  "OnChecklistSet": ChecklistSetEvent;
+  "OnChecklistDeleted": ChecklistDeletedEvent;
 }
 
 
@@ -38,7 +41,7 @@ export interface IWorkHub {
 
   subscribeToWorkspace(workspaceId: string): Promise<SubscribeToWorkspaceResponse>;
   unsubscribeFromWorkspace(workspaceId: string): Promise<void>;
-  
+
   /**
    * @deprecated No longer needed, you only need to subscribe to a workspace
    */
@@ -93,4 +96,10 @@ export interface IWorkHub {
   createLink(request: LinkCreateRequest): Promise<LinkCreateResponse>;
   previewLinkCreate(request: LinkCreatePreviewRequest): Promise<LinkCreatePreviewResponse>;
   deleteLink(request: LinkDeleteRequest): Promise<LinkDeleteResponse>;
+
+  checklistCreate(request: ChecklistCreateRequest): Promise<ChecklistCreateResponse>;
+  checklistDelete(request: ChecklistDeleteRequest): Promise<ChecklistDeleteResponse>;
+  checklistAddItem(request: ChecklistAddItemRequest): Promise<ChecklistAddItemResponse>;
+  checklistRemoveItem(request: ChecklistRemoveItemRequest): Promise<ChecklistRemoveItemResponse>;
+  checklistChangeOrder(request: ChecklistChangeOrderRequest): Promise<ChecklistChangeOrderResponse>;
 }
