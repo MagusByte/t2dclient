@@ -191,19 +191,24 @@ export class WorkHub<HubClient extends IHubClient> implements IWorkHub {
   async verifyWorkspaceToken(request: WorkspaceTokenVerifyRequest): Promise<WorkspaceTokenVerifyResponse> {
     return await this.hubClient.invoke<WorkspaceTokenVerifyResponse>('verifyWorkspaceToken', request);
   }
+
   async checklistCreate(request: ChecklistCreateRequest): Promise<ChecklistCreateResponse> {
-    return await this.hubClient.invoke<ChecklistCreateResponse>("checklistCreate", request);
+    return await this.hubClient.invoke<ChecklistCreateResponse>('checklistCreate', request);
   }
+
   async checklistDelete(request: ChecklistDeleteRequest): Promise<ChecklistDeleteResponse> {
-    return await this.hubClient.invoke<ChecklistDeleteResponse>("checklistDelete", request);
+    return await this.hubClient.invoke<ChecklistDeleteResponse>('checklistDelete', request);
   }
+
   async checklistAddItem(request: ChecklistAddItemRequest): Promise<ChecklistAddItemResponse> {
-    return await this.hubClient.invoke<ChecklistAddItemResponse>("checklistAddIte", request);
+    return await this.hubClient.invoke<ChecklistAddItemResponse>('checklistAddItem', request);
   }
-  async checklistRemoveItem(request: ChecklistRemoveItemRequest): Promise<ChecklistRemoveItemResponse> {
-    return await this.hubClient.invoke<ChecklistRemoveItemResponse>("checklistRemove", request);
+
+  async  checklistRemoveItem(request: ChecklistRemoveItemRequest): Promise<ChecklistRemoveItemResponse> {
+    return await this.hubClient.invoke<ChecklistRemoveItemResponse>('checklistRemoveItem', request);
   }
+
   async checklistChangeOrder(request: ChecklistChangeOrderRequest): Promise<ChecklistChangeOrderResponse> {
-    return await this.hubClient.invoke<ChecklistChangeOrderResponse>("checklistChange", request);
+    return await this.hubClient.invoke<ChecklistChangeOrderResponse>('checklistChangeOrder', request);
   }
 }

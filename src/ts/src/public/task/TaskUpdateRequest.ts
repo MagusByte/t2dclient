@@ -3,7 +3,7 @@ import { TaskComponent, TaskItemDto } from "./dto";
 import { PinType } from "./values";
 import { ValueDisplayType } from "../task-property-definition";
 
-type TaskPropertyChangeType = 'Clear' | 'Set';
+type TaskPropertyChangeType = "Clear" | "Set";
 
 interface TaskPropertyChangeSet {
   type: TaskPropertyChangeType & "Set";
@@ -17,9 +17,11 @@ interface TaskPropertyChangeUnset {
   key: string;
 }
 
-export type TaskPropertyChange = TaskPropertyChangeSet | TaskPropertyChangeUnset;
+export type TaskPropertyChange =
+  | TaskPropertyChangeSet
+  | TaskPropertyChangeUnset;
 
-export type TaskAttributeChangeType = 'Unset' | 'Set';
+export type TaskAttributeChangeType = "Unset" | "Set";
 
 export interface TaskAttributeChange {
   type: TaskAttributeChangeType;
@@ -27,9 +29,7 @@ export interface TaskAttributeChange {
   value?: any; // Using 'any' as it can hold different data types (primitives, DTO-objects and lists)
 }
 
-
-export type TaskPinChangeType = 'Remove' | 'Add';
-
+export type TaskPinChangeType = "Remove" | "Add";
 
 export interface TaskPinChange {
   type: TaskPinChangeType;
@@ -48,6 +48,5 @@ export interface TaskUpdatedValueDto {
   components?: TaskComponent[];
 }
 
-
-export interface TaskUpdateRequest extends UpdateRequest<TaskUpdatedValueDto> { }
-export interface TaskUpdateResponse extends UpdateResponse<TaskItemDto> { }
+export interface TaskUpdateRequest extends UpdateRequest<TaskUpdatedValueDto> {}
+export interface TaskUpdateResponse extends UpdateResponse<TaskItemDto> {}
