@@ -1,6 +1,10 @@
 # Changelog
 
-## [v1.0.3] - 2025-12-19
+## [v1.0.4] - 2026-01-02
+- Fixed typos
+
+## [v1.0.3] - 2025-12-19 
+
 - Add `TaskComponent`
 - Add `ChecklistDto`
 
