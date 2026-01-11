@@ -1,5 +1,29 @@
 # Changelog
 
+## [v1.0.4] - 2026-01-02
+- Fixed typos
+
+## [v1.0.3] - 2025-12-19 
+
+- Add `TaskComponent`
+- Add `ChecklistDto`
+
+## [v1.0.2] - 2025-11-11
+- Add PriorityMatrix to MapDto
+
+## [v1.0.1] - 2025-11-06
+- Add IsArchived bit to Map
+
+## [v1.0.0-rc4] - 2025-10-31
+- Introduced MapDisplaySettings
+
+## [v1.0.0-rc3] - 2025-10-14
+- Add description to task
+
+## [v1.0.0-rc2] - 2025-8-14
+- Add placementItems to SubscribeToWorkspaceResponse
+- Deprecate subscribeToMap methods
+
 ## [v1.0.0-rc1]
 - Initial release
 

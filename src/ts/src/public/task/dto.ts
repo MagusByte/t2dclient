@@ -1,14 +1,11 @@
 import { PinType } from "./values";
 import { ValueDisplayType } from "../task-property-definition";
 
-
-
 export interface TaskPropertyDto {
   key: string;
   type: ValueDisplayType;
   value: any;
 }
-
 
 export interface TaskItemDto {
   id: string;
@@ -34,7 +31,6 @@ export interface TaskConnectionDto {
   taskId: string;
 }
 
-
 export interface TaskAttributeDto {
   key: string;
   value: any;
@@ -44,6 +40,7 @@ export interface TaskFilterDto {
 }
 
 export type TaskComponentType = "checklist";
+
 export interface TaskComponent {
   type: TaskComponentType;
   id: string;

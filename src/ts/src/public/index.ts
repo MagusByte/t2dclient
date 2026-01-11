@@ -14,4 +14,4 @@ export * from "./IApiClient";
 export * from "./IHubClient";
 export * from "./IWorkHub";
 export * from "./WorkHub";
-export * from './hub-only-events'
+export * from "./hub-only-events";
