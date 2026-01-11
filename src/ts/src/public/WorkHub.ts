@@ -18,6 +18,8 @@ export class WorkHub<HubClient extends IHubClient> implements IWorkHub {
 
   constructor(private hubClient: HubClient) {
     this.hubClient.on('OnVersion', (item) => this.invokeHandler("OnVersion", item));
+    this.hubClient.on('OnSystemConfigSet', (item) => this.invokeHandler("OnSystemConfigSet", item));
+    
     this.hubClient.on('OnLinkDeleted', (item) => this.invokeHandler("OnLinkDeleted", item));
     this.hubClient.on('OnLinkSet', (item) => this.invokeHandler("OnLinkSet", item));
     this.hubClient.on('OnMapDeleted', (item) => this.invokeHandler("OnMapDeleted", item));

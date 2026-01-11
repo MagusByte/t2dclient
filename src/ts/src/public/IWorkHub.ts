@@ -9,12 +9,14 @@ import { VersionDto } from "./version";
 import { WorkspaceCreateRequest, WorkspaceCreateResponse, WorkspaceUpdateRequest, WorkspaceUpdateResponse, WorkspaceDeleteRequest, WorkspaceDeleteResponse, WorkspaceSubscriptionRequest, WorkspaceSubscriptionResponse, WorkspaceRemoveMemberRequest, WorkspaceRemoveMemberResponse, WorkspaceCreateTutorialRequest, WorkspaceCreateTutorialResponse, WorkspaceMarkAsTutorialTemplateRequest, WorkspaceMarkAsTutorialTemplateResponse, WorkspaceDeletedEvent, WorkspaceSetEvent } from "./workspace";
 import { WorkspaceTokenCreateRequest, WorkspaceTokenCreateResponse, WorkspaceTokenListRequest, WorkspaceTokenListResponse, WorkspaceTokenRevokeRequest, WorkspaceTokenRevokeResponse, WorkspaceTokenVerifyRequest, WorkspaceTokenVerifyResponse } from "./workspace-token";
 import { ChecklistDeletedEvent, ChecklistSetEvent, ChecklistAddItemRequest, ChecklistAddItemResponse, ChecklistChangeOrderRequest, ChecklistChangeOrderResponse, ChecklistCreateRequest, ChecklistCreateResponse, ChecklistDeleteRequest, ChecklistDeleteResponse, ChecklistRemoveItemRequest, ChecklistRemoveItemResponse} from "./checklist";
+import { SystemConfigSetEvent } from "./system-config";
 
 /**
  * All the events the client can receive.
  */
 export interface WorkHubEventsMap {
   "OnVersion": VersionDto;
+  "OnSystemConfigSet": SystemConfigSetEvent;
   "OnLinkDeleted": LinkDeletedEvent;
   "OnLinkSet": LinkSetEvent;
   "OnMapDeleted": MapDeletedEvent;

@@ -1,5 +1,12 @@
 # Changelog
 
+## [v1.1.0] - 2026-01-11
+- Add `SystemConfig` and events
+- Remove `WorkspacePlan`
+- Change `WorkspaceType.Special` to `WorkspaceType.Temp`
+- Remove `WorkspaceStatus.Paused`
+- Add `SystemTokenItemDto` to `WorkspaceItemDto`
+
 ## [v1.0.4] - 2026-01-02
 - Fixed typos
 

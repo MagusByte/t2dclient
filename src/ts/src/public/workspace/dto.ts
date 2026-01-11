@@ -1,6 +1,5 @@
 import {
   WorkspaceMemberRole,
-  WorkspacePlan,
   WorkspaceType,
   WorkspaceStatus,
 } from "./values";
@@ -28,10 +27,9 @@ export type WorkspaceFeaturesDto = Record<string, any>;
 export interface WorkspaceItemDto {
   id: string;
   ownerAccountId: string;
-  version: number;
   name: string;
+  version: number;
   features: WorkspaceFeaturesDto;
-  plan: WorkspacePlan;
   type: WorkspaceType;
   status: WorkspaceStatus;
   primaryMapId: string;
@@ -44,6 +42,7 @@ export interface WorkspaceItemDto {
   taskFormulaDefinitions: TaskFormulaDefinitionDto[];
   topRailConfigs: WorkspaceTaskCardLabelConfig[];
   bottomRailConfigs: WorkspaceTaskCardLabelConfig[];
+  systemTokens: SystemTokenAccessDto[];
 }
 
 export interface WorkspaceTaskCardLabelConfig {
@@ -59,4 +58,11 @@ export interface WorkspaceUpdatedValuesDto {
   topRailConfigs?: WorkspaceTaskCardLabelConfig[];
   bottomRailConfigs?: WorkspaceTaskCardLabelConfig[];
   taskFormulaDefinitions?: TaskFormulaDefinitionDto[];
+}
+
+export interface SystemTokenAccessDto {
+  systemTokenId: string;
+  tokenHint: string;
+  /** Date-time string (UTC) */
+  expiresAt?: string;
 }
