@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.1.2] - 2026-01-11
+- Make SystemToken namespace by exported by default
+
 ## [v1.1.0] - 2026-01-11
 - Add `SystemConfig` and events
 - Remove `WorkspacePlan`

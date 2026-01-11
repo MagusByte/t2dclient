@@ -4,6 +4,7 @@ export * from "./invite";
 export * from "./link";
 export * from "./map";
 export * from "./placement";
+export * from "./system-config";
 export * from "./task-property-definition";
 export * from "./task";
 export * from "./version";
