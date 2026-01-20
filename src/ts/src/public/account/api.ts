@@ -1,19 +1,55 @@
 import { IApiClient } from "../IApiClient";
+import {
+  AccountApiCreateRequest,
+  AccountApiCreateResponse,
+} from "./AccountApiCreateRequest";
 import { AccountApiGetResponse } from "./AccountApiGetRequest";
-import { AccountApiSetupRequest, AccountApiSetupResponse } from "./AccountApiSetupRequest";
+import {
+  AccountApiLoginRequest,
+  AccountApiLoginResponse,
+} from "./AccountApiLoginRequest";
+import {
+  AccountApiMigrateAuth0Request,
+  AccountApiMigrateAuth0Response,
+} from "./AccountApiMigrateAuth0Request";
+import {
+  AccountApiPasswordChangeRequest,
+  AccountApiPasswordChangeResponse,
+} from "./AccountApiPasswordChangeRequest";
 import { AccountIsOnboardResponse } from "./AccountIsOnboardRequest";
 
 export class AccountApi {
-  constructor(private readonly http: IApiClient) { }
-  readonly #prefix = '/api/v1/account';
+  constructor(private readonly http: IApiClient) {}
+  readonly #prefix = "/api/v1/account";
 
   get() {
     return this.http.getJson<AccountApiGetResponse>(`${this.#prefix}`);
   }
 
-  setup(request: AccountApiSetupRequest) {
-    return this.http.postJson<AccountApiSetupResponse>(
-      `${this.#prefix}/setup`,
+  create(request: AccountApiCreateRequest) {
+    return this.http.postJson<AccountApiCreateResponse>(
+      `${this.#prefix}/create`,
+      request,
+    );
+  }
+
+  login(request: AccountApiLoginRequest) {
+    return this.http.postJson<AccountApiLoginResponse>(
+      `${this.#prefix}/login`,
+      request,
+    );
+  }
+
+  changePassword(request: AccountApiPasswordChangeRequest) {
+    return this.http.postJson<AccountApiPasswordChangeResponse>(
+      `${this.#prefix}/change-password`,
+      request,
+    );
+  }
+
+  migrateAuth0(request: AccountApiMigrateAuth0Request) {
+    return this.http.postJson<AccountApiMigrateAuth0Response>(
+      `${this.#prefix}/migrate/auth0`,
       request,
     );
   }

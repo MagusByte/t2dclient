@@ -5,3 +5,7 @@ export interface AccountItemDto {
   displayName: string;
   roles: AccountRole[];
 }
+
+export interface WithToken {
+  token: string;
+}

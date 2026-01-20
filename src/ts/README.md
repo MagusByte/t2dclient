@@ -51,7 +51,7 @@ export class FetchApiClient implements IApiClient {
   prefix: string = 'https://app.todo2d.com';
   private token: string = '';
   constructor(token: string) {
-    this.token = formatWorkspaceToken(token);
+    this.token = formatToken(token, "workspace");
   }
 
   async getJson<R>(url: string, config?: Partial<ApiGetConfig & ApiFetchConfig>): Promise<R> {
@@ -139,7 +139,7 @@ export class HubClient implements IHubClient {
   constructor(private readonly token: string) { }
   private readonly prefix = 'https://app.todo2d.com/api/hubs/work';
   private readonly connection = new signalr.HubConnectionBuilder().withUrl(this.prefix, {
-    accessTokenFactory: () => promise.resolve(formatWorkspaceToken(this.token)),
+    accessTokenFactory: () => promise.resolve(formatToken(this.token, "workspace")),
   })
     .build();
 

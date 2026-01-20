@@ -1,5 +1,15 @@
 # Changelog
 
+## [v2.0.0] - 2026-01-20
+
+First major update in which we remove the classic setup and move away from Auth0.
+
+- Remove `AccountApi.Setup`
+- Add `AccountApi.Create`
+- Add `AccountApi.Login`
+- Add `AccountApi.MigrateAuth0`
+- Deprecated `formatWorkspaceToken` (use `formatToken` instead)
+
 ## [v1.1.2] - 2026-01-11
 - Make SystemToken namespace by exported by default
 
