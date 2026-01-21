@@ -6,6 +6,7 @@ First major update in which we remove the classic setup and move away from Auth0
 
 - Remove `AccountApi.Setup`
 - Add `AccountApi.Create`
+- Add `AccountApi.Update`
 - Add `AccountApi.Login`
 - Add `AccountApi.MigrateAuth0`
 - Deprecated `formatWorkspaceToken` (use `formatToken` instead)

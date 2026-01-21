@@ -16,6 +16,10 @@ import {
   AccountApiPasswordChangeRequest,
   AccountApiPasswordChangeResponse,
 } from "./AccountApiPasswordChangeRequest";
+import {
+  AccountApiUpdateRequest,
+  AccountApiUpdateResponse,
+} from "./AccountApiUpdateRequest";
 import { AccountIsOnboardResponse } from "./AccountIsOnboardRequest";
 
 export class AccountApi {
@@ -43,6 +47,13 @@ export class AccountApi {
   changePassword(request: AccountApiPasswordChangeRequest) {
     return this.http.postJson<AccountApiPasswordChangeResponse>(
       `${this.#prefix}/change-password`,
+      request,
+    );
+  }
+
+  update(request: AccountApiUpdateRequest) {
+    return this.http.postJson<AccountApiUpdateResponse>(
+      `${this.#prefix}/update`,
       request,
     );
   }
