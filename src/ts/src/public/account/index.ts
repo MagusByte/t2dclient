@@ -6,5 +6,6 @@ export * from "./AccountApiCreateRequest";
 export * from "./AccountApiLoginRequest";
 export * from "./AccountApiMigrateAuth0Request";
 export * from "./AccountApiPasswordChangeRequest";
+export * from "./AccountApiPasswordRecoveryRequest";
 export * from "./AccountApiUpdateRequest";
 export * from "./AccountIsOnboardRequest";

@@ -1,14 +1,23 @@
 # Changelog
 
+## [v2.0.1] - 2026-01-27
+
+Added support for password recovery.
+
+- Updated the example in the README.md
+- Add `AccountApi.recoverPassword`
+- Add `AskPasswordChange` to `AccountApiLoginResponse` to hint that user is using a temporary password.
+
 ## [v2.0.0] - 2026-01-20
 
 First major update in which we remove the classic setup and move away from Auth0.
 
 - Remove `AccountApi.Setup`
-- Add `AccountApi.Create`
-- Add `AccountApi.Update`
-- Add `AccountApi.Login`
-- Add `AccountApi.MigrateAuth0`
+- Add `AccountApi.create`
+- Add `AccountApi.update`
+- Add `AccountApi.login`
+- Add `AccountApi.changePassword`
+- Add `AccountApi.migrateAuth0`
 - Deprecated `formatWorkspaceToken` (use `formatToken` instead)
 
 ## [v1.1.2] - 2026-01-11

@@ -17,6 +17,10 @@ import {
   AccountApiPasswordChangeResponse,
 } from "./AccountApiPasswordChangeRequest";
 import {
+  AccountApiPasswordRecoveryRequest,
+  AccountApiPasswordRecoveryResponse,
+} from "./AccountApiPasswordRecoveryRequest";
+import {
   AccountApiUpdateRequest,
   AccountApiUpdateResponse,
 } from "./AccountApiUpdateRequest";
@@ -47,6 +51,13 @@ export class AccountApi {
   changePassword(request: AccountApiPasswordChangeRequest) {
     return this.http.postJson<AccountApiPasswordChangeResponse>(
       `${this.#prefix}/change-password`,
+      request,
+    );
+  }
+
+  recoverPassword(request: AccountApiPasswordRecoveryRequest) {
+    return this.http.postJson<AccountApiPasswordRecoveryResponse>(
+      `${this.#prefix}/recover-password`,
       request,
     );
   }

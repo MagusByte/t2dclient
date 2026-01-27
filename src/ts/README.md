@@ -16,86 +16,179 @@ For a detailed list of all changes and updates, please refer to our changelog: [
 1. Not all API calls are allowed; some require elevated access levels.
 2. The origin of the call is inspected, so this library is not intended for frontend/browser use.
 
-
 ## Getting started
 
 Within the library you will find a set of interfaces and types that define the API endpoints, request and response structures.
-But there are two versions of the client:
+There are two versions of the client:
 - **ApiClient**: This is a client that can be used to make API calls. It requires you to implement the `IApiClient` interface to provide the actual HTTP request logic, such as using `fetch`.
-- **HubClient**: This is a client that can be used to connect with the signalr backend.
+- **HubClient**: This is a client that can be used to connect with the signalr backend. It requires you to implement the `IHubClient`.
 
-### Using a workspace token
+### First things first,
 
-First login to the Todo2d.com website and create a workspace token. This token can be used to authenticate API calls.
+Login in to the Todo2d.com website and create a workspace token. This token can be used to authenticate API calls.
 
 > **NOTE**  
-> You can only use the workspace token to interact with a single workspace. If you want to interact with multiple workspaces, you will need to create a separate instance of the API client for each workspace.
+> You can only use the workspace token to interact with a single workspace.
 
-### Creating an API Client
+Store it somewhere safe.
 
-If you only intend to make API calls, you can create an instance of the `FetchApiClient` class, which implements the `IApiClient` interface using the Fetch API.
+### Implement the IApiClient and IHubClient
 
-> **WARNING**  
-> You can't use the `FetchApiClient` in a browser environment, as it is designed for server-side use only. It is not intended for frontend/browser use due to security and CORS restrictions.
-> The example below is for demonstration purposes only.
+See the example at the end of this file. We recomend you copy it.
+
+### Wrap the ApiClient and HubClient
 
 ```typescript
-const workspaceApi = new WorkspaceApi(new FetchApi("MY_WORKSPACE_TOKEN"));
-workspaceApi.list().then(workspaces => {
-  console.log(workspaces);
-}).catch(error => {
-  console.error("Error fetching workspaces:", error);
+import { formatToken, WorkHub, WorkspaceApi } from "@magusbyte/t2dclient";
+
+import { ApiClient } from "./ApiClient"; // See the example at the end
+import { HubClient } from "./HubClient"; 
+
+const apiClient = new ApiClient(formatToken(process.env.WORKSPACE_TOKEN, "workspace"));
+const hubClient = new HubClient(formatToken(process.env.WORKSPACE_TOKEN, "workspace"));
+
+const workHub = new WorkHub(hubClient);
+const workspaceClient = new WorkspaceApi(apiClient);
+
+// Use the hub for live updates
+workHub.addEventHandler("OnTaskSet", (ev) => {
+  if (ev.item.version == 0) {
+    console.log(`Task created: ${ev.item.name} (id: ${ev.item.id})`);
+  } else {
+   console.log(`Task updated: ${ev.item.name} (id: ${ev.item.id}, version: ${ev.item.version})`);
+  }
 });
 
-export class FetchApiClient implements IApiClient {
-  prefix: string = 'https://app.todo2d.com';
-  private token: string = '';
-  constructor(token: string) {
-    this.token = formatToken(token, "workspace");
+hubClient.start().then(async ()=>{
+  // Retrieve the workspace
+  var workspace = (await workspaceClient.list()).items[0]!;
+  // Tell the hub subscribe to the workspace
+  await workHub.subscribeToWorkspace(workspace.id);
+  
+  // Create a task (the Workhub is faster than using the TaskApi)
+  await workHub.createTask({
+    name: "My first task",
+    workspaceId: workspace.id,        
+    properties: [],
+    attributes: []
+  });
+});
+```
+
+## Demo
+
+You can find the full demo at https://github.com/MagusByte/t2d-cli-demo
+
+## Example implementation
+
+### HubClient
+
+```typescript
+import { type IHubClient } from "@magusbyte/t2dclient";
+const signalr = require("@microsoft/signalr");
+
+// An example implementation of the HubClient
+export class HubClient implements IHubClient {
+  constructor(private readonly token: string) {}
+  private readonly prefix = "https://app.todo2d.com/api/hubs/work";
+  private readonly connection = new signalr.HubConnectionBuilder()
+    .withUrl(this.prefix, {
+      accessTokenFactory: () => Promise.resolve(this.token),
+    })
+    .build();
+
+  async start() {
+    await this.connection.start();
   }
 
-  async getJson<R>(url: string, config?: Partial<ApiGetConfig & ApiFetchConfig>): Promise<R> {
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: this.createHeaders()
-    });
-
-    return this.getData<R>(response);
+  invoke<T>(methodName: string, ...args: any[]): Promise<T> {
+    return this.connection.invoke(methodName, ...args);
   }
 
-  async postJson<R, T = object>(url: string, body: T, config?: Partial<ApiPostConfig & ApiFetchConfig>): Promise<R> {
-    const response = await fetch(url, {
-      method: 'POST',
+  on(methodName: string, newMethod: (...args: any[]) => any): void {
+    return this.connection.on(methodName, newMethod);
+  }
+}
+```
+
+### ApiClient
+
+```typescript
+import {
+  ApiDeleteConfig,
+  ApiFetchConfig,
+  ApiGetConfig,
+  ApiPatchConfig,
+  ApiPostConfig,
+  ApiPutConfig,
+  formatToken,
+  type IApiClient,
+} from "@magusbyte/t2dclient";
+
+export class ApiClient implements IApiClient {
+  prefix: string = "https://app.todo2d.com";
+  constructor(private token: string) {}
+
+  async getJson<R>(
+    url: string,
+    config?: Partial<ApiGetConfig & ApiFetchConfig>,
+  ): Promise<R> {
+    const response = await fetch(this.prefix + url, {
+      method: "GET",
       headers: this.createHeaders(),
-      body: JSON.stringify(body)
     });
-    
+
     return this.getData<R>(response);
   }
 
-  async putJson<R, T = object>(url: string, body: T, config?: Partial<ApiPutConfig & ApiFetchConfig>): Promise<R> {
-    const response = await fetch(url, {
-      method: 'PUT',
+  async postJson<R, T = object>(
+    url: string,
+    body: T,
+    config?: Partial<ApiPostConfig & ApiFetchConfig>,
+  ): Promise<R> {
+    const response = await fetch(this.prefix + url, {
+      method: "POST",
       headers: this.createHeaders(),
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     });
-    
+
     return this.getData<R>(response);
   }
 
-  async patchJson<R, T = object>(url: string, body: T, config?: Partial<ApiPatchConfig & ApiFetchConfig>): Promise<R> {
-    const response = await fetch(url, {
-      method: 'PATCH',
+  async putJson<R, T = object>(
+    url: string,
+    body: T,
+    config?: Partial<ApiPutConfig & ApiFetchConfig>,
+  ): Promise<R> {
+    const response = await fetch(this.prefix + url, {
+      method: "PUT",
       headers: this.createHeaders(),
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
+    });
+
+    return this.getData<R>(response);
+  }
+
+  async patchJson<R, T = object>(
+    url: string,
+    body: T,
+    config?: Partial<ApiPatchConfig & ApiFetchConfig>,
+  ): Promise<R> {
+    const response = await fetch(this.prefix + url, {
+      method: "PATCH",
+      headers: this.createHeaders(),
+      body: JSON.stringify(body),
     });
     return this.getData<R>(response);
   }
 
-  async deleteJson<R>(url: string, config?: Partial<ApiDeleteConfig & ApiFetchConfig>): Promise<R> {
-    const response = await fetch(url, {
-      method: 'DELETE',
-      headers: this.createHeaders()
+  async deleteJson<R>(
+    url: string,
+    config?: Partial<ApiDeleteConfig & ApiFetchConfig>,
+  ): Promise<R> {
+    const response = await fetch(this.prefix + url, {
+      method: "DELETE",
+      headers: this.createHeaders(),
     });
     return this.getData<R>(response);
   }
@@ -104,54 +197,14 @@ export class FetchApiClient implements IApiClient {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json() as R;
+    return (await response.json()) as R;
   }
 
   private createHeaders(): HeadersInit | undefined {
     return {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.token}`,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${this.token}`,
     };
-  }
-}
-```
-
-### Creating a Hub Client
-If you want to connect to the signalr backend, you can create an instance of the `HubClient` class, which implements the `IHubClient` interface.
-
-```typescript
-
-const TOKEN = 'MY_WORKSPACE_TOKEN';
-const WORKSPACE_ID = 'MY_WORKSPACE_ID';
-
-const hub = new WorkHub(new HubClient(TOKEN));
-hub.on("OnWorkspaceSet", (result) => console.log("Workspace set:", result));
-
-hub.start().then(() => {
-  console.log("Hub connection started");
-  hub.subscribeToWorkspace(WORKSPACE_ID); // Ask for updates on the workspace
-}).catch(error => {
-  console.error("Error starting hub connection:", error);
-});
-
-// An example implementation of the HubClient
-export class HubClient implements IHubClient {
-  constructor(private readonly token: string) { }
-  private readonly prefix = 'https://app.todo2d.com/api/hubs/work';
-  private readonly connection = new signalr.HubConnectionBuilder().withUrl(this.prefix, {
-    accessTokenFactory: () => promise.resolve(formatToken(this.token, "workspace")),
-  })
-    .build();
-
-  async start() {
-    await this.connection.start();
-  }
-  invoke<T>(methodName: string, ...args: any[]): Promise<T> {
-    return this.connection.invoke<T>(methodName, ...args);
-  }
-
-  on(methodName: string, newMethod: (...args: any[]) => any): void {
-    return this.connection.on(methodName, newMethod);
   }
 }
 ```
