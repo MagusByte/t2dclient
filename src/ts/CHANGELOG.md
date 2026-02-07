@@ -1,5 +1,10 @@
 # Changelog
 
+## [v2.1.0] - 2026-02-07
+
+- Removed `TaskPropertyValueUsage` as this is no longer used
+- The `TaskCreateRequest.properties` is optional
+
 ## [v2.0.1] - 2026-01-27
 
 Added support for password recovery.
