@@ -6,7 +6,7 @@
     "url": "git+https://github.com/MagusByte/t2dclient.git"
   },
   "description": "The client for the todo2d.com platform, written in TypeScript.",
-  "license": "ISC",
+  "license": "MIT",
   "main": "dist/main/index.js",
   "typings": "dist/main/index.d.ts",
   "module": "dist/module/index.js",
