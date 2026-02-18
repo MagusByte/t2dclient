@@ -1,4 +1,5 @@
 import { IApiClient } from "../IApiClient";
+import { WebhookListResponse } from "../webhook/WebhookListRequest";
 import { WorkspaceCreateRequest, WorkspaceCreateResponse } from "./WorkspaceCreateRequest";
 import { WorkspaceCreateTutorialRequest, WorkspaceCreateTutorialResponse } from "./WorkspaceCreateTutorialRequest";
 import { WorkspaceDeleteRequest, WorkspaceDeleteResponse } from "./WorkspaceDeleteRequest";
@@ -46,5 +47,9 @@ export class WorkspaceApi {
 
   setTutorialTemplate(request: WorkspaceMarkAsTutorialTemplateRequest) {
     return this.http.postJson<WorkspaceMarkAsTutorialTemplateResponse>(`${this.#prefix}/tutorial/set-template`, request);
+  }
+
+  listWebhooks(id: string) {
+    return this.http.getJson<WebhookListResponse>(`${this.#prefix}/${id}/webhooks`);
   }
 }
