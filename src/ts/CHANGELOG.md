@@ -1,5 +1,9 @@
 # Changelog
 
+## [v2.1.3] - 2026-02-19
+
+- Export all interfaces and types of Webhook
+
 ## [v2.1.2] - 2026-02-19
 
 Publish build version
@@ -20,7 +24,7 @@ Added support for password recovery.
 - Updated the example in the README.md
 - Add `AccountApi.recoverPassword`
 - Add `AskPasswordChange` to `AccountApiLoginResponse` to hint that user is
-using a temporary password.
+  using a temporary password.
 
 ## [v2.0.0] - 2026-01-20
 
