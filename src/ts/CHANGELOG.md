@@ -1,5 +1,9 @@
 # Changelog
 
+## [v2.1.2] - 2026-02-19
+
+Publish build version
+
 ## [v2.1.1] - 2026-02-19
 
 - Add Webhooks
