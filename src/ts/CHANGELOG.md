@@ -1,5 +1,9 @@
 # Changelog
 
+## [v2.2.0] - 2026-03-06
+
+- Add the Cycle methods
+
 ## [v2.1.3] - 2026-02-19
 
 - Export all interfaces and types of Webhook
