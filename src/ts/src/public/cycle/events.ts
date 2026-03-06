@@ -1,8 +1,8 @@
 import { CycleItemDto } from "./dto";
 
 export interface CycleDeletedEvent {
-  workspaceId: string;
-  mapId: string;
+  cycleId: string;
+  accountId: string;
 }
 
 export interface CycleSetEvent {
