@@ -4,8 +4,9 @@ export interface CycleItemDto {
   version: number;
   start: string;
   end: string;
-  targets: CycleTargetDto[];
-  subTargets: CycleTargetDto[];
+  goals: CycleTaskDto[];
+  /** The order in which tasks should be displayed */
+  order: CycleTaskDto[];
   createdAt: string;
   updatedAt: string;
 }
@@ -13,11 +14,12 @@ export interface CycleItemDto {
 export interface CycleUpdateValues {
   start?: string;
   end?: string;
-  targets?: CycleTargetDto[];
-  subTargets?: CycleTargetDto[];
+  goals?: CycleTaskDto[];
+  /** The order in which tasks should be displayed */
+  order?: CycleTaskDto[];
 }
 
-export interface CycleTargetDto {
+export interface CycleTaskDto {
   workspaceId: string;
   taskId: string;
 }
