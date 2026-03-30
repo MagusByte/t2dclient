@@ -98,13 +98,11 @@ import {
   ChecklistChangeOrderResponse,
 } from "./checklist";
 import {
-  CycleCreateRequest,
-  CycleCreateResponse,
-  CycleDeleteRequest,
-  CycleDeleteResponse,
-  CycleUpdateRequest,
-  CycleUpdateResponse,
-} from "./cycle";
+  PersonalGoalsUpdateRequest,
+  PersonalGoalsGetResponse,
+  PersonalGoalsUpdateResponse,
+  PersonalGoalsGetRequest,
+} from "./personal-goals";
 
 export class WorkHub<HubClient extends IHubClient> implements IWorkHub {
   #handlers: {
@@ -155,14 +153,10 @@ export class WorkHub<HubClient extends IHubClient> implements IWorkHub {
     this.hubClient.on("OnChecklistDeleted", (item) =>
       this.invokeHandler("OnChecklistDeleted", item),
     );
-    this.hubClient.on("OnCycleSet", (item) =>
-      this.invokeHandler("OnCycleSet", item),
-    );
-    this.hubClient.on("OnCycleDeleted", (item) =>
-      this.invokeHandler("OnCycleDeleted", item),
+    this.hubClient.on("OnPersonalGoalsSet", (item) =>
+      this.invokeHandler("OnPersonalGoalsSet", item),
     );
   }
-
   private invokeHandler<K extends WorkhubEventMethods>(
     event: K,
     ev: WorkHubEventsMap[K],
@@ -512,23 +506,20 @@ export class WorkHub<HubClient extends IHubClient> implements IWorkHub {
     );
   }
 
-  async cycleCreate(request: CycleCreateRequest): Promise<CycleCreateResponse> {
-    return await this.hubClient.invoke<CycleCreateResponse>(
-      "cycleCreate",
+  async personalGoalsGet(
+    request: PersonalGoalsGetRequest,
+  ): Promise<PersonalGoalsGetResponse> {
+    return await this.hubClient.invoke<PersonalGoalsGetResponse>(
+      "personalGoalsGet",
       request,
     );
   }
 
-  async cycleUpdate(request: CycleUpdateRequest): Promise<CycleUpdateResponse> {
-    return await this.hubClient.invoke<CycleUpdateResponse>(
-      "cycleUpdate",
-      request,
-    );
-  }
-
-  async cycleDelete(request: CycleDeleteRequest): Promise<CycleDeleteResponse> {
-    return await this.hubClient.invoke<CycleDeleteResponse>(
-      "cycleDelete",
+  async personalGoalsUpdate(
+    request: PersonalGoalsUpdateRequest,
+  ): Promise<PersonalGoalsUpdateResponse> {
+    return await this.hubClient.invoke<PersonalGoalsGetResponse>(
+      "personalGoalsUpdate",
       request,
     );
   }

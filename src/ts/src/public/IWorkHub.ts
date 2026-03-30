@@ -105,15 +105,12 @@ import {
 } from "./checklist";
 import { SystemConfigSetEvent } from "./system-config";
 import {
-  CycleCreateRequest,
-  CycleCreateResponse,
-  CycleDeletedEvent,
-  CycleDeleteRequest,
-  CycleDeleteResponse,
-  CycleSetEvent,
-  CycleUpdateRequest,
-  CycleUpdateResponse,
-} from "./cycle";
+  PersonalGoalsGetRequest,
+  PersonalGoalsGetResponse,
+  PersonalGoalsSetEvent,
+  PersonalGoalsUpdateRequest,
+  PersonalGoalsUpdateResponse,
+} from "./personal-goals";
 
 /**
  * All the events the client can receive.
@@ -133,8 +130,7 @@ export interface WorkHubEventsMap {
   OnWorkspaceSet: WorkspaceSetEvent;
   OnChecklistSet: ChecklistSetEvent;
   OnChecklistDeleted: ChecklistDeletedEvent;
-  OnCycleSet: CycleSetEvent;
-  OnCycleDeleted: CycleDeletedEvent;
+  OnPersonalGoalsSet: PersonalGoalsSetEvent;
 }
 
 export type WorkhubEventMethods = keyof WorkHubEventsMap;
@@ -268,8 +264,11 @@ export interface IWorkHub {
     request: ChecklistChangeOrderRequest,
   ): Promise<ChecklistChangeOrderResponse>;
 
-  // Personal - Cycle
-  cycleCreate(request: CycleCreateRequest): Promise<CycleCreateResponse>;
-  cycleUpdate(request: CycleUpdateRequest): Promise<CycleUpdateResponse>;
-  cycleDelete(request: CycleDeleteRequest): Promise<CycleDeleteResponse>;
+  personalGoalsGet(
+    request: PersonalGoalsGetRequest,
+  ): Promise<PersonalGoalsGetResponse>;
+
+  personalGoalsUpdate(
+    request: PersonalGoalsUpdateRequest,
+  ): Promise<PersonalGoalsUpdateResponse>;
 }

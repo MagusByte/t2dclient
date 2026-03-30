@@ -2,7 +2,7 @@
 
 ## [v2.2.0] - 2026-03-06
 
-- Add the Cycle methods
+- Add methods to manage personal goals.
 
 ## [v2.1.3] - 2026-02-19
 
