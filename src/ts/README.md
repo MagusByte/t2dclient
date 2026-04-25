@@ -1,31 +1,54 @@
 # Todo2d.com TypeScript Client
 
-This TypeScript client provides a comprehensive set of types, DTOs, and API interfaces for interacting with the Todo2d.com backend services. It is designed to enable developers to build custom automations, integrations, and backend services that communicate with the Todo2d platform in a type-safe and maintainable way.
+This TypeScript client provides a comprehensive set of types, DTOs, and API
+interfaces for interacting with the Todo2d.com backend services. It is designed
+to enable developers to build custom automations, integrations, and backend
+services that communicate with the Todo2d platform in a type-safe and
+maintainable way.
 
 ## Purpose
-- **Automation**: Build scripts or backend services that automate workflows using Todo2d.com APIs.
-- **Integration**: Integrate Todo2d.com with other systems or services using a strongly-typed client.
-- **Type Safety**: Leverage TypeScript types and interfaces for robust, error-resistant development.
+
+- **Automation**: Build scripts or backend services that automate workflows
+  using Todo2d.com APIs.
+- **Integration**: Integrate Todo2d.com with other systems or services using a
+  strongly-typed client.
+- **Type Safety**: Leverage TypeScript types and interfaces for robust,
+  error-resistant development.
 
 ## API Change Management
-We are committed to maintaining backward compatibility for the v1 API. You can safely use this library as we continue to add new features and endpoints to v1. If a breaking change is required that would cause the client to stop functioning, we will introduce a new API path (e.g., v2) rather than breaking existing integrations.
 
-For a detailed list of all changes and updates, please refer to our changelog: [https://docs.todo2d.com/reference/changelog/](https://docs.todo2d.com/reference/changelog/)
+We are committed to maintaining backward compatibility for the v1 API. You can
+safely use this library as we continue to add new features and endpoints to v1.
+If a breaking change is required that would cause the client to stop
+functioning, we will introduce a new API path (e.g., v2) rather than breaking
+existing integrations.
+
+For a detailed list of all changes and updates, please refer to our changelog:
+[https://docs.todo2d.com/reference/changelog/](https://docs.todo2d.com/reference/changelog/)
 
 ## Important Notes
+
 1. Not all API calls are allowed; some require elevated access levels.
-2. The origin of the call is inspected, so this library is not intended for frontend/browser use.
+2. The origin of the call is inspected, so this library is not intended for
+   frontend/browser use.
 
 ## Getting started
 
-Within the library you will find a set of interfaces and types that define the API endpoints, request and response structures.
+Within the library you will find a set of interfaces and types that define the
+API endpoints, request and response structures.
+
 There are two versions of the client:
-- **ApiClient**: This is a client that can be used to make API calls. It requires you to implement the `IApiClient` interface to provide the actual HTTP request logic, such as using `fetch`.
-- **HubClient**: This is a client that can be used to connect with the signalr backend. It requires you to implement the `IHubClient`.
 
-### First things first,
+- **ApiClient**: This is a client that can be used to make API calls. It
+  requires you to implement the `IApiClient` interface to provide the actual HTTP
+  request logic, such as using `fetch`.
+- **HubClient**: This is a client that can be used to connect with the signalr
+  backend. It requires you to implement the `IHubClient`.
 
-Login in to the Todo2d.com website and create a workspace token. This token can be used to authenticate API calls.
+### First things first
+
+Login in to the Todo2d.com website and create a workspace token. This token can
+be used to authenticate API calls.
 
 > **NOTE**  
 > You can only use the workspace token to interact with a single workspace.
@@ -34,7 +57,7 @@ Store it somewhere safe.
 
 ### Implement the IApiClient and IHubClient
 
-See the example at the end of this file. We recomend you copy it.
+See the example at the end of this file. We recommend you copy it.
 
 ### Wrap the ApiClient and HubClient
 
@@ -42,10 +65,14 @@ See the example at the end of this file. We recomend you copy it.
 import { formatToken, WorkHub, WorkspaceApi } from "@magusbyte/t2dclient";
 
 import { ApiClient } from "./ApiClient"; // See the example at the end
-import { HubClient } from "./HubClient"; 
+import { HubClient } from "./HubClient";
 
-const apiClient = new ApiClient(formatToken(process.env.WORKSPACE_TOKEN, "workspace"));
-const hubClient = new HubClient(formatToken(process.env.WORKSPACE_TOKEN, "workspace"));
+const apiClient = new ApiClient(
+  formatToken(process.env.WORKSPACE_TOKEN, "workspace"),
+);
+const hubClient = new HubClient(
+  formatToken(process.env.WORKSPACE_TOKEN, "workspace"),
+);
 
 const workHub = new WorkHub(hubClient);
 const workspaceClient = new WorkspaceApi(apiClient);
@@ -55,29 +82,31 @@ workHub.addEventHandler("OnTaskSet", (ev) => {
   if (ev.item.version == 0) {
     console.log(`Task created: ${ev.item.name} (id: ${ev.item.id})`);
   } else {
-   console.log(`Task updated: ${ev.item.name} (id: ${ev.item.id}, version: ${ev.item.version})`);
+    console.log(
+      `Task updated: ${ev.item.name} (id: ${ev.item.id}, version: ${ev.item.version})`,
+    );
   }
 });
 
-hubClient.start().then(async ()=>{
+hubClient.start().then(async () => {
   // Retrieve the workspace
   var workspace = (await workspaceClient.list()).items[0]!;
   // Tell the hub subscribe to the workspace
   await workHub.subscribeToWorkspace(workspace.id);
-  
+
   // Create a task (the Workhub is faster than using the TaskApi)
   await workHub.createTask({
     name: "My first task",
-    workspaceId: workspace.id,        
+    workspaceId: workspace.id,
     properties: [],
-    attributes: []
+    attributes: [],
   });
 });
 ```
 
 ## Demo
 
-You can find the full demo at https://github.com/MagusByte/t2d-cli-demo
+You can find the full demo at [github.com/MagusByte/t2d-cli-demo](https://github.com/MagusByte/t2d-cli-demo)
 
 ## Example implementation
 
