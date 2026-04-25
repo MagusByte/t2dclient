@@ -103,6 +103,16 @@ import {
   PersonalGoalsUpdateResponse,
   PersonalGoalsGetRequest,
 } from "./personal-goals";
+import {
+  TimeTrackerCreateRequest,
+  TimeTrackerCreateResponse,
+  TimeTrackerDeleteRequest,
+  TimeTrackerDeleteResponse,
+  TimeTrackerListRequest,
+  TimeTrackerListResponse,
+  TimeTrackerUpdateRequest,
+  TimeTrackerUpdateResponse,
+} from "./time-tracker";
 
 export class WorkHub<HubClient extends IHubClient> implements IWorkHub {
   #handlers: {
@@ -155,6 +165,13 @@ export class WorkHub<HubClient extends IHubClient> implements IWorkHub {
     );
     this.hubClient.on("OnPersonalGoalsSet", (item) =>
       this.invokeHandler("OnPersonalGoalsSet", item),
+    );
+
+    this.hubClient.on("OnTimeTrackerSet", (item) =>
+      this.invokeHandler("OnTimeTrackerSet", item),
+    );
+    this.hubClient.on("OnTimeTrackerDeleted", (item) =>
+      this.invokeHandler("OnTimeTrackerDeleted", item),
     );
   }
   private invokeHandler<K extends WorkhubEventMethods>(
@@ -518,8 +535,44 @@ export class WorkHub<HubClient extends IHubClient> implements IWorkHub {
   async personalGoalsUpdate(
     request: PersonalGoalsUpdateRequest,
   ): Promise<PersonalGoalsUpdateResponse> {
-    return await this.hubClient.invoke<PersonalGoalsGetResponse>(
+    return await this.hubClient.invoke<PersonalGoalsUpdateResponse>(
       "personalGoalsUpdate",
+      request,
+    );
+  }
+
+  async timeTrackerList(
+    request: TimeTrackerListRequest,
+  ): Promise<TimeTrackerListResponse> {
+    return await this.hubClient.invoke<TimeTrackerListResponse>(
+      "timeTrackerList",
+      request,
+    );
+  }
+
+  async timeTrackerCreate(
+    request: TimeTrackerCreateRequest,
+  ): Promise<TimeTrackerCreateResponse> {
+    return await this.hubClient.invoke<TimeTrackerCreateResponse>(
+      "timeTrackerCreate",
+      request,
+    );
+  }
+
+  async timeTrackerDelete(
+    request: TimeTrackerDeleteRequest,
+  ): Promise<TimeTrackerDeleteResponse> {
+    return await this.hubClient.invoke<TimeTrackerDeleteResponse>(
+      "timeTrackerDelete",
+      request,
+    );
+  }
+
+  async timeTrackerUpdate(
+    request: TimeTrackerUpdateRequest,
+  ): Promise<TimeTrackerUpdateResponse> {
+    return await this.hubClient.invoke<TimeTrackerUpdateResponse>(
+      "timeTrackerUpdate",
       request,
     );
   }

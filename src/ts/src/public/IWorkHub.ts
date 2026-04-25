@@ -111,6 +111,18 @@ import {
   PersonalGoalsUpdateRequest,
   PersonalGoalsUpdateResponse,
 } from "./personal-goals";
+import {
+  TimeTrackerCreateRequest,
+  TimeTrackerCreateResponse,
+  TimeTrackerDeletedEvent,
+  TimeTrackerDeleteRequest,
+  TimeTrackerDeleteResponse,
+  TimeTrackerListRequest,
+  TimeTrackerListResponse,
+  TimeTrackerSetEvent,
+  TimeTrackerUpdateRequest,
+  TimeTrackerUpdateResponse,
+} from "./time-tracker";
 
 /**
  * All the events the client can receive.
@@ -131,6 +143,8 @@ export interface WorkHubEventsMap {
   OnChecklistSet: ChecklistSetEvent;
   OnChecklistDeleted: ChecklistDeletedEvent;
   OnPersonalGoalsSet: PersonalGoalsSetEvent;
+  OnTimeTrackerSet: TimeTrackerSetEvent;
+  OnTimeTrackerDeleted: TimeTrackerDeletedEvent;
 }
 
 export type WorkhubEventMethods = keyof WorkHubEventsMap;
@@ -271,4 +285,17 @@ export interface IWorkHub {
   personalGoalsUpdate(
     request: PersonalGoalsUpdateRequest,
   ): Promise<PersonalGoalsUpdateResponse>;
+
+  timeTrackerList(
+    request: TimeTrackerListRequest,
+  ): Promise<TimeTrackerListResponse>;
+  timeTrackerCreate(
+    request: TimeTrackerCreateRequest,
+  ): Promise<TimeTrackerCreateResponse>;
+  timeTrackerUpdate(
+    request: TimeTrackerUpdateRequest,
+  ): Promise<TimeTrackerUpdateResponse>;
+  timeTrackerDelete(
+    request: TimeTrackerDeleteRequest,
+  ): Promise<TimeTrackerDeleteResponse>;
 }
