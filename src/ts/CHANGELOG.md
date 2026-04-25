@@ -1,5 +1,10 @@
 # Changelog
 
+## [v2.3.0] - 2026-04-25
+
+- Add methods to manage time-tracker
+- Add methods to manage time-entry
+
 ## [v2.2.0] - 2026-03-06
 
 - Add methods to manage personal goals.

@@ -8,6 +8,7 @@ export * from "./placement";
 export * from "./system-config";
 export * from "./task-property-definition";
 export * from "./task";
+export * from "./time-entry";
 export * from "./time-tracker";
 export * from "./version";
 export * from "./webhook";
