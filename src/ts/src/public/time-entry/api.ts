@@ -55,6 +55,9 @@ export class TimeEntryApi {
     if (request.now) {
       parameters.push(`now=${encodeURIComponent(request.now.toISOString())}`);
     }
+    if (request.timeDirection) {
+      parameters.push(`timeDirection=${request.timeDirection}`);
+    }
     if (request.page) {
       parameters.push(`page=${request.page}`);
     }

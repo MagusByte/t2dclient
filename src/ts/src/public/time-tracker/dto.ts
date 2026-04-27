@@ -1,7 +1,7 @@
 export interface TimeTrackerDto {
   id: string;
   accountId: string;
-  startedAt: Date;
+  startedAt: string;
   data: TimeTrackerData;
 }
 

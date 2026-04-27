@@ -1,8 +1,8 @@
 export interface TimeEntryDto {
   id: string;
   description: string;
-  start: Date;
-  end: Date;
+  start: string;
+  end: string;
   deleted: boolean;
   createdAt: Date;
   updatedAt: Date;
