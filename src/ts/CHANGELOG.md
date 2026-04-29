@@ -1,6 +1,6 @@
 # Changelog
 
-## [v2.3.0] - 2026-04-25
+## [v2.3.0] - 2026-04-29
 
 - Add methods to manage time-tracker
 - Add methods to manage time-entry
