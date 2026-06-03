@@ -3,6 +3,7 @@ export * from "./checklist";
 export * from "./invite";
 export * from "./link";
 export * from "./map";
+export * from "./organization";
 export * from "./personal-goals";
 export * from "./placement";
 export * from "./system-config";
