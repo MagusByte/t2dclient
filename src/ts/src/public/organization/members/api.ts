@@ -4,6 +4,10 @@ import {
   OrganizationMemberAddResponse,
 } from "./OrganizationMemberAddRequest";
 import {
+  OrganizationMemberMyRequest,
+  OrganizationMemberMyResponse,
+} from "./OrganizationMemberMyRequest";
+import {
   OrganizationMemberRemoveRequest,
   OrganizationMemberRemoveResponse,
 } from "./OrganizationMemberRemoveRequest";
@@ -45,6 +49,12 @@ export class OrganizationMemberApi {
     return this.http.postJson<OrganizationMemberSearchResponse>(
       `${this.#prefix}/search`,
       request,
+    );
+  }
+
+  myMembership(request: OrganizationMemberMyRequest) {
+    return this.http.getJson<OrganizationMemberMyResponse>(
+      `${this.#prefix}/my-membership?organizationId=${request.organizationId}`,
     );
   }
 }

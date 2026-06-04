@@ -1,4 +1,4 @@
-import { OrganizationItemDto } from "../dto";
+import { OrganizationMemberDto } from "./dto";
 
 export interface OrganizationMemberSearchRequest {
   organizationIds: string[];
@@ -8,5 +8,8 @@ export interface OrganizationMemberSearchRequest {
 }
 
 export interface OrganizationMemberSearchResponse {
-  items: OrganizationItemDto[];
+  page: number;
+  pageSize: number;
+  totalCount: number;
+  items: OrganizationMemberDto[];
 }
