@@ -1,4 +1,4 @@
 export interface ContactDto {
-  id: string;
+  accountId: string;
   name: string;
 }
