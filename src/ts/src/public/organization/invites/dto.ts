@@ -1,28 +1,28 @@
 export interface OrganizationInviteDto {
   /** Unique identifier for the invite. (Required string) */
-  Id: string;
+  id: string;
 
   /** Identifier of the organization. (Required string) */
-  OrganizationId: string;
+  organizationId: string;
 
   /** Indicates whether the invite contains a secret key. (Required boolean) */
-  HasSecret: boolean;
+  hasSecret: boolean;
 
   /** Indicates whether the invite has been consumed. (Required boolean) */
-  Consumed: boolean;
+  consumed: boolean;
 
   /** Indicates whether the invite has been revoked. (Required boolean) */
-  Revoked: boolean;
+  revoked: boolean;
 
   /** Timestamp when the invite was created. (Required Date) */
-  CreatedAt: Date;
+  createdAt: Date;
 
   /** Timestamp when the invite expires. (Required Date) */
-  ExpiresAt: Date;
+  expiresAt: Date;
 
   /** Timestamp when the invite was revoked (optional). (Nullable Date) */
-  RevokedAt?: string;
+  revokedAt?: string;
 
   /** Timestamp when the invite was consumed (optional). (Nullable Date) */
-  ConsumedAt?: string;
+  consumedAt?: string;
 }

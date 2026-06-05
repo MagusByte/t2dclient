@@ -8,4 +8,5 @@ export interface OrganizationInviteCreateRequest {
 
 export interface OrganizationInviteCreateResponse {
   item: OrganizationInviteDto;
+  inviteCode: string;
 }
