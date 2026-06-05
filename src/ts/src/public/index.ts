@@ -1,4 +1,5 @@
 export * from "./account";
+export * from "./contact";
 export * from "./checklist";
 export * from "./invite";
 export * from "./link";
