@@ -4,4 +4,5 @@ export interface OrganizationInvitePreviewRequest {
 }
 export interface OrganizationInvitePreviewResponse {
   organizationName: string;
+  secretRequired: boolean;
 }

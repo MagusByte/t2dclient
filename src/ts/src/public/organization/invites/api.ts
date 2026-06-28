@@ -46,14 +46,14 @@ export class OrganizationInviteApi {
   }
 
   preview(request: OrganizationInvitePreviewRequest) {
-    return this.http.patchJson<OrganizationInvitePreviewResponse>(
+    return this.http.postJson<OrganizationInvitePreviewResponse>(
       `${this.#prefix}/preview`,
       request,
     );
   }
 
   accept(request: OrganizationInviteAcceptRequest) {
-    return this.http.patchJson<OrganizationInviteAcceptResponse>(
+    return this.http.postJson<OrganizationInviteAcceptResponse>(
       `${this.#prefix}/accept`,
       request,
     );
