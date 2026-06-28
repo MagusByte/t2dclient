@@ -6,6 +6,7 @@ import { WorkspaceDeleteRequest, WorkspaceDeleteResponse } from "./WorkspaceDele
 import { WorkspaceGetResponse } from "./WorkspaceGetRequest";
 import { WorkspaceListRequest } from "./WorkspaceListRequest";
 import { WorkspaceMarkAsTutorialTemplateRequest, WorkspaceMarkAsTutorialTemplateResponse } from "./WorkspaceMarkAsTutorialTemplateRequest";
+import { WorkspaceMemberAddRequest, WorkspaceMemberAddResponse } from "./WorkspaceMemberAddRequest";
 import { WorkspaceRemoveMemberRequest, WorkspaceRemoveMemberResponse } from "./WorkspaceRemoveMemberRequest";
 import { WorkspaceSubscriptionRequest, WorkspaceSubscriptionResponse } from "./WorkspaceSubscriptionRequest";
 import { WorkspaceUpdateRequest, WorkspaceUpdateResponse } from "./WorkspaceUpdateRequest";
@@ -35,6 +36,10 @@ export class WorkspaceApi {
   }
   getSubscription(request: WorkspaceSubscriptionRequest) {
     return this.http.getJson<WorkspaceSubscriptionResponse>(`${this.#prefix}/${request.workspaceId}/subscription`)
+  }
+
+  addMember(request: WorkspaceMemberAddRequest) {
+    return this.http.postJson<WorkspaceMemberAddResponse>(`${this.#prefix}/add-member`, request);
   }
 
   removeMember(request: WorkspaceRemoveMemberRequest) {

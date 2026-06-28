@@ -8,6 +8,7 @@ export * from "./WorkspaceDeleteRequest";
 export * from "./WorkspaceGetRequest";
 export * from "./WorkspaceListRequest";
 export * from "./WorkspaceMarkAsTutorialTemplateRequest";
+export * from "./WorkspaceMemberAddRequest";
 export * from "./WorkspaceRemoveMemberRequest";
 export * from "./WorkspaceSubscriptionRequest";
 export * from "./WorkspaceUpdateRequest";

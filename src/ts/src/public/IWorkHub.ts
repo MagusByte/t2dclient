@@ -70,6 +70,8 @@ import {
   WorkspaceDeleteResponse,
   WorkspaceSubscriptionRequest,
   WorkspaceSubscriptionResponse,
+  WorkspaceMemberAddRequest,
+  WorkspaceMemberAddResponse,
   WorkspaceRemoveMemberRequest,
   WorkspaceRemoveMemberResponse,
   WorkspaceCreateTutorialRequest,
@@ -194,6 +196,9 @@ export interface IWorkHub {
   getWorkspaceSubscription(
     request: WorkspaceSubscriptionRequest,
   ): Promise<WorkspaceSubscriptionResponse>;
+  addWorkspaceMember(
+    request: WorkspaceMemberAddRequest,
+  ): Promise<WorkspaceMemberAddResponse>;
   removeWorkspaceMember(
     request: WorkspaceRemoveMemberRequest,
   ): Promise<WorkspaceRemoveMemberResponse>;

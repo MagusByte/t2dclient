@@ -68,6 +68,8 @@ import {
   WorkspaceDeleteResponse,
   WorkspaceSubscriptionRequest,
   WorkspaceSubscriptionResponse,
+  WorkspaceMemberAddRequest,
+  WorkspaceMemberAddResponse,
   WorkspaceRemoveMemberRequest,
   WorkspaceRemoveMemberResponse,
   WorkspaceCreateTutorialRequest,
@@ -355,8 +357,17 @@ export class WorkHub<HubClient extends IHubClient> implements IWorkHub {
   async deleteWorkspace(
     request: WorkspaceDeleteRequest,
   ): Promise<WorkspaceDeleteResponse> {
-    return await this.hubClient.invoke<WorkspaceDeleteRequest>(
+    return await this.hubClient.invoke<WorkspaceDeleteResponse>(
       "deleteWorkspace",
+      request,
+    );
+  }
+
+  async addWorkspaceMember(
+    request: WorkspaceMemberAddRequest,
+  ): Promise<WorkspaceMemberAddResponse> {
+    return await this.hubClient.invoke<WorkspaceMemberAddResponse>(
+      "addWorkspaceMember",
       request,
     );
   }
