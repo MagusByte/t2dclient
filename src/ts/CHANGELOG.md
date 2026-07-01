@@ -1,5 +1,10 @@
 # Changelog
 
+## [v2.4.0] - 2026-07-01
+
+- Add methods to manage organization
+- Add contact API
+
 ## [v2.3.0] - 2026-04-29
 
 - Add methods to manage time-tracker
