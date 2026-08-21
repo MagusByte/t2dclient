@@ -7,6 +7,7 @@ export * from "./map";
 export * from "./organization";
 export * from "./personal-goals";
 export * from "./placement";
+export * from "./project";
 export * from "./system-config";
 export * from "./task-property-definition";
 export * from "./task";

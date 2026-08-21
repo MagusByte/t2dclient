@@ -1,1 +1,1 @@
-export type LinkCreationIssue = 'Duplicate' | 'IsCyclic';
+export type LinkCreationIssue = "Duplicate" | "IsCyclic";

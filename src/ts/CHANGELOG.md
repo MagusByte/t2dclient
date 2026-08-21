@@ -1,5 +1,11 @@
 # Changelog
 
+## [v2.5.0] - 2026-08-21
+
+- Add Projects API
+- Update `WorkspaceItemDto` so that it lists the projects in which it is a resource.
+- Update `WorkspaceMemberItem`, so that it describes how it's authorized.
+
 ## [v2.4.0] - 2026-07-01
 
 - Add methods to manage organization
